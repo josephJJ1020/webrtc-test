@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/main.js" type="module"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <section>
+        <h1>hello world</h1>
+        <div class="video-container">
+          <video id="local-video" autoplay muted></video>
+          <video id="remote-video" autoplay></video>
+        </div>
+        <div class="button-container">
+          <button id="hide-cam">hide cam</button>
+          <button id="mute">mute</button>
+        </div>
+        <div>
+            <p>your code:</p>
+            <h2 id="personal-code"></h2>
+            <input type="text" id="code-input">
+            <button id="send-offer">Connect</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
