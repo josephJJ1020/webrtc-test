@@ -27,7 +27,6 @@ server.on("connection", (client) => {
 
   client.on("add-ice-candidate", (data) => {
     // console.log("ice candidate received");
-
     server.to(data.receiver).emit("add-ice-candidate", data);
   });
 });

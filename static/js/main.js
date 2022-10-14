@@ -19,7 +19,6 @@ client.on("connect", () => {
 
   /* WebRTC */
   client.on("offer", async (data) => {
-    console.log('received offer')
     // when someone sends an offer
     if (data.offer) {
       const remoteDescription = new RTCSessionDescription(data.offer); // set their offer as remote description
@@ -27,8 +26,6 @@ client.on("connect", () => {
 
       const answer = await pc.createAnswer(); // create an answer and set local description as the answer
       await pc.setLocalDescription(answer);
-
-      console.log(pc.signalingState);
 
       client.emit("answer", {
         // send answer to caller
@@ -40,13 +37,10 @@ client.on("connect", () => {
   });
 
   client.on("answer", async (data) => {
-    console.log('received answer')
     // when someone callee sends an answer
     if (data.answer) {
       const remoteDescription = new RTCSessionDescription(data.answer); // set their answer as remote description
       await pc.setRemoteDescription(remoteDescription);
-
-      
     }
   });
 
@@ -61,7 +55,6 @@ client.on("connect", () => {
 pc.onicecandidate = (event) => {
   // send local ice candidates to remote
   if (event.candidate) {
-    console.log(event.candidate)
     client.emit("add-ice-candidate", {
       iceCandidate: event.candidate,
       receiver: receiverId,
@@ -77,8 +70,7 @@ pc.ontrack = (event) => {
 
 /* local video */
 
-const setLocalVideo = async () => {
-  // reuse this for voice call; just set video to false
+const setLocalVideo = async () => { // reuse this for voice call; just set video to false
   const localMedia = await navigator.mediaDevices.getUserMedia({
     video: true,
     audio: true,
